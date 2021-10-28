@@ -56,9 +56,11 @@ type RarityData = { rank: string } & Traits;
 // Step 1: Read the downloaded_filename JSON
 const filename = Deno.args[0];
 const data: RawData = await readJSON(filename);
-const moonrank: Record<string, string> = await readJSON("gloom-moonrank.json");
+const moonrank: Record<string, string> = await readJSON(
+  "data/gloom-moonrank.json"
+);
 
-const db = new DB("glooms.db");
+const db = new DB("data/glooms.db");
 
 // Step 2: Filter specific data we want to keep and write to a new JSON file
 const enhancedData: Array<ParsedData> = data.results
@@ -104,7 +106,7 @@ console.log("Initial Glooms:", data.results.length);
 console.log("Processed Glooms:", enhancedData.length);
 
 // Step 3. Write a new JSON file with our filtered data
-await writeCSV("gloom-data-processed.csv", enhancedData);
+await writeCSV("gloom-data-magiceden.csv", enhancedData);
 console.log("Wrote gloom data");
 
 const sortedData = enhancedData.sort((a, b) => {
@@ -141,5 +143,5 @@ const topPicks = buckets.reduce((picks, bucket) => {
   return [...picks, ...bucketSelection];
 }, []);
 
-await writeCSV("gloom-picks.csv", topPicks);
+await writeCSV("gloom-picks-magiceden.csv", topPicks);
 console.log("Wrote gloom picks");
