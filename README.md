@@ -4,4 +4,4 @@ Monitors Gloom Punk Club at MagicEden and Solanart marketplaces and updates data
 
 Check `gloom-picks` for the best picks under 0.5, 1, 1.5 and 2 SOL!
 
-Browse all data at https://flatgithub.com/braposo/magiceden-gloom-monitor (use picker to select files)
+Browse all data at https://flatgithub.com/braposo/gloom-monitor and use "Data File" picker to select files
