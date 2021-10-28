@@ -71,10 +71,10 @@ type RarityData = { rank: string } & Traits;
 const filename = Deno.args[0];
 const data: Array<RawData> = await readJSON(filename);
 const moonrank: Record<string, string> = await readJSON(
-  "data/gloom-moonrank.json"
+  "zzz/gloom-moonrank.json"
 );
 
-const db = new DB("data/glooms.db");
+const db = new DB("zzz/glooms.db");
 
 // Step 2: Filter specific data we want to keep and write to a new JSON file
 const enhancedData: Array<ParsedData> = data
