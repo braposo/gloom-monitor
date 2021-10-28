@@ -1,6 +1,10 @@
 // Helper library written for useful postprocessing tasks with Flat Data
 // Has helper functions for manipulating csv, txt, json, excel, zip, and image files
-import { readJSON, writeCSV } from "https://deno.land/x/flat@0.0.13/mod.ts";
+import {
+  readJSON,
+  writeCSV,
+  removeFile,
+} from "https://deno.land/x/flat@0.0.13/mod.ts";
 
 import { DB } from "https://deno.land/x/sqlite@v3.1.1/mod.ts";
 
@@ -145,3 +149,5 @@ const topPicks = buckets.reduce((picks, bucket) => {
 
 await writeCSV("gloom-picks-magiceden.csv", topPicks);
 console.log("Wrote gloom picks");
+
+await removeFile(filename);
