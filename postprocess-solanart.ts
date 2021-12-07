@@ -132,7 +132,7 @@ const dataWithScore = enhancedData.map((item) => {
     price,
     moonRank,
     rank,
-    score: (price - minPrice) * 100 + parseInt(moonRank || ""),
+    "💎 score": (price - minPrice) * 100 + parseInt(moonRank || ""),
     ...rest,
   };
 });
