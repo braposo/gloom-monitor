@@ -76,6 +76,8 @@ const moonrank: Record<string, string> = await readJSON(
 
 const db = new DB("zzz/glooms.db");
 
+let minPrice = Infinity;
+
 // Step 2: Filter specific data we want to keep and write to a new JSON file
 const enhancedData: Array<ParsedData> = data
   .map((gloom) => {
@@ -102,6 +104,10 @@ const enhancedData: Array<ParsedData> = data
       { rank: "" }
     );
 
+    if (gloom.price < minPrice) {
+      minPrice = gloom.price;
+    }
+
     return {
       id: parseInt(id),
       price: gloom.price,
@@ -118,6 +124,16 @@ db.close();
 
 console.log("Initial Glooms:", data.length);
 console.log("Processed Glooms:", enhancedData.length);
+
+const dataWithScore = enhancedData.map((item) => {
+  const { id, price, ...rest } = item;
+  return {
+    id,
+    price,
+    score: (price - minPrice) * 100 + parseInt(rest.moonRank || ""),
+    ...rest,
+  };
+});
 
 // Step 3. Write a new JSON file with our filtered data
 await writeCSV("gloom-data-solanart.csv", enhancedData);
