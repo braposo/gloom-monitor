@@ -116,11 +116,13 @@ console.log("Initial Glooms:", data.results.length);
 console.log("Processed Glooms:", enhancedData.length);
 
 const dataWithScore = enhancedData.map((item) => {
-  const { id, price, ...rest } = item;
+  const { id, price, moonRank, rank, ...rest } = item;
   return {
     id,
     price,
-    score: (price - minPrice) * 100 + parseInt(rest.moonRank || ""),
+    moonRank,
+    rank,
+    score: (price - minPrice) * 100 + parseInt(moonRank || ""),
     ...rest,
   };
 });

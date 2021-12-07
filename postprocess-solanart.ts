@@ -126,17 +126,19 @@ console.log("Initial Glooms:", data.length);
 console.log("Processed Glooms:", enhancedData.length);
 
 const dataWithScore = enhancedData.map((item) => {
-  const { id, price, ...rest } = item;
+  const { id, price, moonRank, rank, ...rest } = item;
   return {
     id,
     price,
-    score: (price - minPrice) * 100 + parseInt(rest.moonRank || ""),
+    moonRank,
+    rank,
+    score: (price - minPrice) * 100 + parseInt(moonRank || ""),
     ...rest,
   };
 });
 
 // Step 3. Write a new JSON file with our filtered data
-await writeCSV("gloom-data-solanart.csv", enhancedData);
+await writeCSV("gloom-data-solanart.csv", dataWithScore);
 console.log("Wrote gloom data");
 
 const sortedData = enhancedData.sort((a, b) => {
